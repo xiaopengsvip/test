@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --animate-gradient: gradient 8s linear infinite;
+  --animate-blob: blob 7s infinite;
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+  .glass-panel {
+    @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-xl;
+  }
+  .glass-card {
+    @apply bg-white/40 dark:bg-white/5 backdrop-blur-lg border border-white/50 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-white/10;
+  }
+  .glass-button {
+    @apply bg-white/50 dark:bg-white/10 backdrop-blur-md border border-white/50 dark:border-white/10 hover:bg-white/70 dark:hover:bg-white/20 transition-all shadow-sm;
+  }
+  .glass-input {
+    @apply bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/50 dark:border-white/10 focus:bg-white/50 dark:focus:bg-black/50 transition-all outline-none;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+body {
+  @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-indigo-500/30;
+  background-attachment: fixed;
+}
+
+:root:not(.dark) body {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,97%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,80%,0.3) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,80%,0.3) 0, transparent 50%);
+}
+
+.dark body {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+}
